@@ -104,50 +104,10 @@
         const database = firebase.database();
 
         let history = [];
-       // Cấu hình
-const THRESHOLD = 200;
-const MAX_HISTORY = 100;
-const SAVE_INTERVAL = 2 * 60 * 1000; // 2 phút
-
-// Lấy dữ liệu từ localStorage (nếu có)
-let history = JSON.parse(localStorage.getItem('smokeHistory')) || [];
-
-// Thời gian lưu lần cuối
-let lastSaveTime = 0;
-
-// Khi web load xong
-document.addEventListener('DOMContentLoaded', () => {
-    if (history.length > 0) {
-        renderHistory();
-    }
-});
-
-// Hàm thêm dữ liệu mới
-function addData(value) {
-    const now = Date.now();
-
-    if (value > THRESHOLD) {
-        const newEntry = {
-            value: value,
-            time: new Date().toLocaleString()
-        };
-
-        history.push(newEntry);
-
-        // Giới hạn số lượng lịch sử
-        if (history.length > MAX_HISTORY) {
-            history.shift();
-        }
-
-        // Chỉ lưu sau mỗi 2 phút
-        if (now - lastSaveTime > SAVE_INTERVAL) {
-            localStorage.setItem('smokeHistory', JSON.stringify(history));
-            lastSaveTime = now;
-        }
-
-        renderHistory();
-    }
-}
+        const THRESHOLD = 200; 
+        const MAX_HISTORY = 100; 
+        const SAVE_INTERVAL = 2 * 60 * 1000; // 2 phút = 120000ms let lastSaveTime = 0;
+        let lastSaveTime = 0;
 
         const connBadge = document.getElementById('connBadge');
         const connText = document.getElementById('connText');
